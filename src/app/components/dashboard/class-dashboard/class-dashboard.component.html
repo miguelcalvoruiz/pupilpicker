@@ -1,0 +1,36 @@
+<div class="container">
+    <h2>Class Dashboard</h2>
+
+    <div class="mb-3">
+        <label for="studentName" class="form-label">Student Name</label>
+        <input type="text" class="form-control" id="studentName" [(ngModel)]="studentName">
+    </div>
+    <button (click)="addStudent()" class="btn btn-primary mb-3">Add Student</button>
+
+    <h3>Students</h3>
+    <ul class="list-group">
+        <li *ngFor="let student of students" class="list-group-item">
+            {{ student.name }}
+            <button (click)="removeStudent(student)" class="btn btn-danger btn-sm float-end">Remove</button>
+            <button *ngIf="!student.hasJoker" (click)="giveJoker(student)"
+                class="btn btn-warning btn-sm float-end me-2">Give Joker</button>
+            <button *ngIf="student.hasJoker" (click)="removeJoker(student)"
+                class="btn btn-secondary btn-sm float-end me-2">Remove Joker</button>
+        </li>
+    </ul>
+
+    <h3>Removed Students</h3>
+    <ul class="list-group">
+        <li *ngFor="let student of removedStudents" class="list-group-item">
+            {{ student.name }}
+            <button (click)="reAddStudent(student)" class="btn btn-success btn-sm float-end">Re-add</button>
+        </li>
+    </ul>
+
+    <button (click)="resetStudents()" class="btn btn-secondary mt-3">Reset All Students</button>
+    <button (click)="chooseRandomStudent()" class="btn btn-primary mt-3">Choose Random Student</button>
+
+    <div *ngIf="chosenStudent" class="alert alert-info mt-3">
+        Chosen Student: {{ chosenStudent.name }}
+    </div>
+</div>
